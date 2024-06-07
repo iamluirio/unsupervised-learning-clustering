@@ -14,7 +14,11 @@ In addition to the traditional approach, I used a different metric for the group
 We then appear the different models, to observe the results.
 
 
-## Datasets
+## Dataset Import
+I based my analysis on [**_Mall_Customers.csv_**](https://www.kaggle.com/datasets/shwetabh123/mall-customers) downloadable from [**Kaggle**](https://www.kaggle.com/).
+
+The dataset contains the data of **200 customers of a generic mall**, with 5 columns: **the customer's ID, Gender, Age, Annual income (in k$) and Spending Score (1-100)**.
+
 | CUST_ID | BALANCE     | BALANCE_FREQUENCY | PURCHASES | ONEOFF_PURCHASES | INSTALLMENTS_PURCHASES | CASH_ADVANCE  | PURCHASES_FREQUENCY | ONEOFF_PURCHASES_FREQUENCY | PURCHASES_INSTALLMENTS_FREQUENCY | CASH_ADVANCE_FREQUENCY | CASH_ADVANCE_TRX | PURCHASES_TRX | CREDIT_LIMIT | PAYMENTS     | MINIMUM_PAYMENTS | PRC_FULL_PAYMENT | TENURE |
 |---------|-------------|-------------------|-----------|------------------|------------------------|---------------|----------------------|----------------------------|-------------------------------|------------------------|-----------------|----------------|---------------|-------------|-----------------|------------------|--------|
 | C10001  | 40.90       | 0.818             | 95.40     | 0.00             | 95.40                  | 0.00          | 0.167                | 0.00                       | 0.083                        | 0.00                   | 0               | 2             | 1000          | 201.80       | 139.51           | 0.00             | 12     |
