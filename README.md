@@ -1,2 +1,2 @@
-# unsupervised-clustering
-Two types of clustering belonging to two different families: two approaches different from the standard method, K-means and DBSCAN applied to two different datasets.
+# Unsupervised Learning Data Analysis: Clustering
+**Clustering** is a type of unsupervised learning in machine learning and data analysis that involves grouping a set of objects in such a way that objects in the same group (called a **cluster**) are more similar to each other than to those in other groups (clusters). It is a common technique for statistical data analysis used in many fields, including machine learning, pattern recognition, image analysis, information retrieval, and bioinformatics.
