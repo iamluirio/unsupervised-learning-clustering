@@ -48,7 +48,7 @@ We then compare the two different models, to observe the results.
 In the context of clustering or data analysis, cosine similarity can be used to calculate how similar two samples are based on their characteristics. Values ​​closer to 1 indicate that the samples are similar, while values ​​closer to 0 indicate that the samples are different.
 
 <div align="center">
-![Screenshot from 2024-06-10 16-59-26](https://github.com/iamluirio/unsupervised-learning-clustering/assets/118205581/6ae8f8c8-3480-4741-b217-1c87b851b990)
+  <img src="https://github.com/iamluirio/unsupervised-learning-clustering/assets/118205581/e2a59896-cb5c-4515-a3d5-0d7181fe5801" />
 <div/>
 
 ### Ideal Fundamental Parameters
