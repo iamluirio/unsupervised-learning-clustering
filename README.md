@@ -34,15 +34,22 @@ standard_matrix = df.iloc[:,[3,4]].values
 
 We extract the _Annual Income_ and _Spending Score_ columns from the dataframe to apply the algorithm, using these two features to compare the different samples, and to be able to group clusters of samples.
 
-This is the classic approach based on **based on the similarities between the feature vectors**.
+This is the classic approach based on **based on the similarities between the feature vectors**. 
+If you are interested in the traditional Euclidean Distance based DBSCAN approach,, please refer to **metti file tradizionale**.
 
-### Data Standardization
-**Standardization** is a common technique used in data preprocessing to **make features (variables) comparable to each other** and have a mean of zero and a standard deviation of one, so that they have a similar or common scale.
+## Innovative Approach
+We want to modify the algorithm to obtain a clustering based not on the similarities between the feature vectors, but **on the similarities of each sample with the other samples**.
 
-```python 
-scaler = StandardScaler()
-standard_matrix = scaler.fit_transform(standard_matrix)
-```
+We then compare the two different models, to observe the results.
+
+### Cosine Similarity Metric
+```cosine_similarity``` is a function that calculates the **cosine similarity between vectors**. It is often used to calculate the similarity between samples or objects in a multidimensional space. Cosine similarity is a measure that evaluates the angle between two vectors, indicating how similar they are in direction.
+
+In the context of clustering or data analysis, cosine similarity can be used to calculate how similar two samples are based on their characteristics. Values ​​closer to 1 indicate that the samples are similar, while values ​​closer to 0 indicate that the samples are different.
+
+<div align="center">
+![Screenshot from 2024-06-10 16-59-26](https://github.com/iamluirio/unsupervised-learning-clustering/assets/118205581/6ae8f8c8-3480-4741-b217-1c87b851b990)
+<div/>
 
 ### Ideal Fundamental Parameters
 These parameters are essential for the operation of DBSCAN and will influence the shape and size of the clusters identified.
@@ -76,4 +83,47 @@ print(f"Best eps: {best_eps}")
 print(f"Best min_samples: {best_min_samples}")
 ```
 
+For example, with the following output: 
 
+```
+Best score: 0.4148124800517594
+Best eps: 0.4
+Best min_samples: 8
+```
+
+- A silhouette score of 0.4148 indicates a moderate level of clustering quality, where clusters are reasonably well-separated and cohesive.
+- The 0.4 eps (epsilon) parameter defines the maximum distance between two samples for them to be considered as in the same neighborhood.
+- The 8 value parameter defines the minimum number of samples in a neighborhood for a point to be considered a core point.
+
+### DBSCAN Model
+Assigning the previous parameters, we can create a **DBSCAN istance**:
+
+```python
+model1 = DBSCAN(eps=0.4,min_samples=8)
+clusters1 = model1.fit_predict(standard_matrix)
+```
+
+We also calculate the **Homogeneity and Heterogeneity** values:
+- **Homogeneity** measures how similar the points within a cluster are to each other in terms of their characteristics. A high value of homogeneity indicates that the points within a cluster are very similar to each other. If a cluster contains only samples from a single class, then the homogeneity is maximum (1.0).
+
+- **Heterogeneity** measures how distinct and separated the points of different clusters are. A low value of heterogeneity indicates that the clusters are well separated and distinct from each other. A high value of heterogeneity may indicate overlap between clusters or the presence of very similar clusters.
+
+```python
+# Display cluster properties
+n_clusters1 = len(set(clusters1)) - (1 if -1 in clusters1 else 0)
+n_noise1 = list(clusters1).count(-1)
+print('Number of clusters:', n_clusters1)
+print('Number of noise points:', n_noise1)
+
+for i in range(n_clusters1):
+    print('Cluster', i+1, ':')
+    cluster_size = len(standard_matrix[clusters1 == i])
+    print('Number of observations:', cluster_size)
+    cluster_homogeneity = np.sum(clusters1 == i) / cluster_size
+    print('Homogeneity:', cluster_homogeneity)
+    cluster_heterogeneity = np.sum(clusters1 != i) / (len(standard_matrix) - cluster_size)
+    print('Heterogeneity:', cluster_heterogeneity)
+    print('------------------------')
+```
+
+# Cluster 
