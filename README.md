@@ -29,9 +29,51 @@ The dataset contains the data of **200 customers of a generic mall**, with 5 col
 
 ## Traditional Approach
 ```python 
-matrix = df.iloc[:,[3,4]].values
+standard_matrix = df.iloc[:,[3,4]].values
 ```
 
 We extract the _Annual Income_ and _Spending Score_ columns from the dataframe to apply the algorithm, using these two features to compare the different samples, and to be able to group clusters of samples.
 
 This is the classic approach based on **based on the similarities between the feature vectors**.
+
+### Data Standardization
+**Standardization** is a common technique used in data preprocessing to **make features (variables) comparable to each other** and have a mean of zero and a standard deviation of one, so that they have a similar or common scale.
+
+```python 
+scaler = StandardScaler()
+standard_matrix = scaler.fit_transform(standard_matrix)
+```
+
+### Ideal Fundamental Parameters
+These parameters are essential for the operation of DBSCAN and will influence the shape and size of the clusters identified.
+
+- **eps**: This is the **maximum radius** around each point that will be considered during the clustering process. It is one of the key parameters of DBSCAN and **determines the "maximum distance" between points** to define if they belong to the same cluster.
+
+- **min_samples**: This parameter represents **the minimum number of points that must be present within the eps radius** for a point to be considered as a **"core point"**. Core points are those that are central in a cluster.
+
+**Exhaustive research** to find the best values ​​of _eps_ and _min_samples_ parameters for the DBSCAN algorithm. The metric used to evaluate the different parameter combinations is [**the Silhouette score**](https://en.wikipedia.org/wiki/Silhouette_(clustering)).
+
+```python 
+best_score = -1
+best_eps = None
+best_min_samples = None
+
+for eps in eps_values:
+    for min_samples in min_samples_values:
+        dbscan = DBSCAN(eps=eps, min_samples=min_samples)
+        dbscan.fit(standard_matrix)
+        labels = dbscan.labels_
+        if len(set(labels)) > 1:
+            score = silhouette_score(standard_matrix, labels)
+            
+            if score > best_score:
+                best_score = score
+                best_eps = eps
+                best_min_samples = min_samples
+
+print(f"Best score: {best_score}")
+print(f"Best eps: {best_eps}")
+print(f"Best min_samples: {best_min_samples}")
+```
+
+
