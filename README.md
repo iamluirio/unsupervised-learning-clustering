@@ -46,7 +46,8 @@ We then compare the two different models, to observe the results.
 ```cosine_similarity``` is a function that calculates the **cosine similarity between vectors**. It is often used to calculate the similarity between samples or objects in a multidimensional space. Cosine similarity is a measure that evaluates the angle between two vectors, indicating how similar they are in direction.
 
 In the context of clustering or data analysis, cosine similarity can be used to calculate how similar two samples are based on their characteristics. Values ​​closer to 1 indicate that the samples are similar, while values ​​closer to 0 indicate that the samples are different.
-![Screenshot_10-6-2024_17850_it wikipedia org](https://github.com/iamluirio/unsupervised-learning-clustering/assets/118205581/933f21c6-2a68-4d66-ba43-325f4448a793)
+![Screenshot from 2024-06-10 17-12-22](https://github.com/iamluirio/unsupervised-learning-clustering/assets/118205581/7a16c134-f92b-414c-82ae-c7e7fc766361)
+
 
 <div align="center">
   <img src="https://github.com/iamluirio/unsupervised-learning-clustering/assets/118205581/e2a59896-cb5c-4515-a3d5-0d7181fe5801" />
