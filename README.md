@@ -27,3 +27,11 @@ The dataset contains the data of **200 customers of a generic mall**, with 5 col
 | 4             | Female | 23  | 16                    | 77                     |
 | 5             | Female | 31  | 17                    | 40                     |
 
+## Traditional Approach
+```python 
+matrix = df.iloc[:,[3,4]].values
+```
+
+We extract the _Annual Income_ and _Spending Score_ columns from the dataframe to apply the algorithm, using these two features to compare the different samples, and to be able to group clusters of samples.
+
+This is the classic approach based on **based on the similarities between the feature vectors**.
