@@ -35,7 +35,7 @@ standard_matrix = df.iloc[:,[3,4]].values
 We extract the _Annual Income_ and _Spending Score_ columns from the dataframe to apply the algorithm, using these two features to compare the different samples, and to be able to group clusters of samples.
 
 This is the classic approach based on **based on the similarities between the feature vectors**. 
-If you are interested in the traditional Euclidean Distance based DBSCAN approach,, please refer to **metti file tradizionale**.
+If you are interested in the traditional Euclidean Distance based DBSCAN approach, please refer to **metti file tradizionale**.
 
 ## Innovative Approach
 We want to modify the algorithm to obtain a clustering based not on the similarities between the feature vectors, but **on the similarities of each sample with the other samples**.
@@ -50,6 +50,38 @@ In the context of clustering or data analysis, cosine similarity can be used to 
 <div align="center">
 <img src="https://github.com/iamluirio/unsupervised-learning-clustering/assets/118205581/7a16c134-f92b-414c-82ae-c7e7fc766361" alt="Screenshot" width="300"/>
 </div>
+
+```python 
+# We extract numeric features excluding 'CustomerID'
+numeric_features = df[['Age', 'Annual Income (k$)', 'Spending Score (1-100)']]
+
+# We extract 'Gender' column and we convert it in a dummy variable
+gender_dummies = pd.get_dummies(df['Gender'], drop_first=True)
+
+features = pd.concat([numeric_features, gender_dummies], axis=1)
+
+# Similarity matrix calculation
+cosine_matrix = cosine_similarity(features)
+```
+
+```
+Similarity Matrix:
+[[1.         0.96940834 0.70708157 ... 0.78406032 0.51687605 0.78357168]
+ [0.96940834 1.         0.51241578 ... 0.67283958 0.34713448 0.67909188]
+ [0.70708157 0.51241578 1.         ... 0.78778502 0.78795584 0.76742685]
+ ...
+ [0.78406032 0.67283958 0.78778502 ... 1.         0.92466312 0.99944667]
+ [0.51687605 0.34713448 0.78795584 ... 0.92466312 1.         0.91818242]
+ [0.78357168 0.67909188 0.76742685 ... 0.99944667 0.91818242 1.        ]]
+```
+
+In the **similarity matrix**, each value represents **how similar two samples are to each other based on the specified conditions and relationships**. In our case, **we consider the gender of the samples along with the differences in the other properties**, and calculate a similarity measure based on these factors.
+
+The values ​​of the similarity matrix can range from 0 to 1, where:
+- **0** represents **no similarity**: Two samples are not similar based on the conditions and relationships considered.
+- **1** represents **maximum similarity**: Two samples are very similar based on the conditions and relationships considered.
+
+Since we have combined the similarity of the gender with the similarity of the differences in the other properties, the values ​​in the matrix will reflect how similar the samples are based on this combination of factors.
 
 ### Ideal Fundamental Parameters
 These parameters are essential for the operation of DBSCAN and will influence the shape and size of the clusters identified.
@@ -68,39 +100,35 @@ best_min_samples = None
 for eps in eps_values:
     for min_samples in min_samples_values:
         dbscan = DBSCAN(eps=eps, min_samples=min_samples)
-        dbscan.fit(standard_matrix)
+        dbscan.fit(cosine_matrix)
         labels = dbscan.labels_
         if len(set(labels)) > 1:
-            score = silhouette_score(standard_matrix, labels)
+            score = silhouette_score(cosine_matrix, labels)
             
             if score > best_score:
                 best_score = score
                 best_eps = eps
                 best_min_samples = min_samples
-
-print(f"Best score: {best_score}")
-print(f"Best eps: {best_eps}")
-print(f"Best min_samples: {best_min_samples}")
 ```
 
 For example, with the following output: 
 
 ```
-Best score: 0.4148124800517594
+Best score: 0.5107709022017272
 Best eps: 0.4
-Best min_samples: 8
+Best min_samples: 4
 ```
 
-- A silhouette score of 0.4148 indicates a moderate level of clustering quality, where clusters are reasonably well-separated and cohesive.
+- A silhouette score of 0.5107709022017272 indicates a moderate level of clustering quality, where clusters are reasonably well-separated and cohesive.
 - The 0.4 eps (epsilon) parameter defines the maximum distance between two samples for them to be considered as in the same neighborhood.
-- The 8 value parameter defines the minimum number of samples in a neighborhood for a point to be considered a core point.
+- The 4 value parameter defines the minimum number of samples in a neighborhood for a point to be considered a core point.
 
 ### DBSCAN Model
 Assigning the previous parameters, we can create a **DBSCAN istance**:
 
 ```python
-model1 = DBSCAN(eps=0.4,min_samples=8)
-clusters1 = model1.fit_predict(standard_matrix)
+model2 = DBSCAN(eps=0.4,min_samples=4)
+clusters2 = model1.fit_predict(cosine_matrix)
 ```
 
 We also calculate the **Homogeneity and Heterogeneity** values:
@@ -126,4 +154,154 @@ for i in range(n_clusters1):
     print('------------------------')
 ```
 
-# Cluster 
+For each cluster, we display its caratheristics:
+
+```
+Number of clusters: 3
+Number of noise points: 20
+Cluster 1 :
+Number of observations: 20
+Homogeneity: 1.0
+Heterogeneity: 1.0
+```
+
+Label values ​​can be integers, where points with the same label belong to the same cluster. Outliers, which do not belong to any cluster, will be labeled -1.
+
+### Visualizing and Comparing Clusters
+Considering we are working with high-dimensional data, we consider **dimension reduction using techniques such as [PCA](https://it.wikipedia.org/wiki/Analisi_delle_componenti_principali) and [t-SNE](https://it.wikipedia.org/wiki/T-distributed_stochastic_neighbor_embedding) before plotting the data**. This helps **visualize the clusters in a two-dimensional plane**.
+
+Main goal of **PCA** is to **transform a set of correlated variables into a new set of uncorrelated variables**, called **"principal components"**. This process allows to reduce the dimensionality of the data, that is, to go from a large number of original variables to a smaller number of principal components, while preserving most of the relevant information.
+
+```python
+# PCA 2-dimensional reduce
+pca = PCA(n_components=2)
+reduced_features = pca.fit_transform(cosine_matrix)
+
+plt.figure(figsize=(8, 6))
+plt.scatter(reduced_features[:, 0], reduced_features[:, 1], c=clusters, cmap='rainbow', marker='o', alpha=0.7)
+plt.scatter(reduced_features[clusters == 0, 0], reduced_features[clusters == 0, 1], color='green', marker='o', label='Cluster 1')
+plt.scatter(reduced_features[clusters == 1, 0], reduced_features[clusters == 1, 1], color='blue', marker='o', label='Cluster 2')
+plt.scatter(reduced_features[clusters == 2, 0], reduced_features[clusters == 2, 1], color='orange', marker='o', label='Cluster 3')
+plt.xlabel('Componente Principale 1')
+plt.ylabel('Componente Principale 2')
+plt.title('Visualizzazione dei Cluster')
+plt.legend()
+plt.show()
+```
+
+<div align="center">
+<img src="https://github.com/iamluirio/unsupervised-learning-clustering/assets/118205581/497765b0-c62a-4259-b25d-192f92a84de1" />
+<div/>
+
+- In the context of dimension reduction, the X-axis represents the first principal component (PC1) obtained from PCA. This component represents the direction along which the data varies the most.
+
+- The Y-axis represents the second principal component (PC2) obtained from PCA. This component is orthogonal to the first and represents the second direction of maximum variation.
+
+Let's look at the cluster labels assigned by DBSCAN and compare them with the colors in the graph to understand the situation of the red dots.
+
+```python
+# Confronto tra etichette dei cluster e colori nel grafico
+plt.figure(figsize=(10, 8))
+
+for i in range(n_clusters):
+    cluster_points = reduced_features[clusters == i]
+    
+    if i == 0:
+        cluster_color = 'green'
+    elif i == 1:
+        cluster_color = 'blue'
+    elif i == 2:
+        cluster_color = 'orange'
+    else:
+        cluster_color = colormaps.get_cmap('rainbow')(i / n_clusters)
+    
+    print('Cluster', i+1, ':')
+    print('Number of observations in cluster:', len(cluster_points))
+    print('Cluster color:', cluster_color)
+    print('------------------------')
+    
+    plt.scatter(cluster_points[:, 0], cluster_points[:, 1], color=cluster_color, label=f'Cluster {i+1}')
+
+# Punti noise (outliers)
+noise_points = reduced_features[clusters == -1]
+plt.scatter(noise_points[:, 0], noise_points[:, 1], color='red', marker='x', label='Noise (Outliers)')
+
+plt.xlabel('Componente Principale 1')
+plt.ylabel('Componente Principale 2')
+plt.title('Visualizzazione dei Cluster e Noise')
+plt.legend()
+plt.colorbar()
+plt.show()
+```
+
+```
+Cluster 1 :
+Number of observations in cluster: 20
+Cluster color: green
+------------------------
+Cluster 2 :
+Number of observations in cluster: 127
+Cluster color: blue
+------------------------
+Cluster 3 :
+Number of observations in cluster: 33
+Cluster color: orange
+------------------------
+Cluster 4 :
+Number of observations in cluster: 0
+Cluster color: (0.503921568627451, 0.9999810273487268, 0.7049255469061472, 1.0)
+------------------------
+Cluster 5 :
+Number of observations in cluster: 0
+Cluster color: (0.8333333333333333, 0.8660254037844387, 0.5000000000000001, 1.0)
+------------------------
+Cluster 6 :
+Number of observations in cluster: 0
+Cluster color: (1.0, 0.4946558433997788, 0.2558427775944356, 1.0)
+------------------------
+```
+
+<div align="center">
+<img src="https://github.com/iamluirio/unsupervised-learning-clustering/assets/118205581/67752cb7-8a52-4de6-86e9-677af2e40183" />
+<div/>
+
+The red dots that do not form a connected region are actually outliers.
+
+### Explained Variance
+Let's look at the variance explained by the first two principal components. This will give us an idea of ​​how well the two components capture the variation in the original data. These values ​​are important because they give you an idea of ​​how well the first two principal components summarize the information in the original data.
+
+```python
+explained_variance = pca.explained_variance_ratio_
+print(f"Variance explained by principal component 1: {explained_variance[0]*100:.2f}%")
+print(f"Variance explained by principal component 2: {explained_variance[1]*100:.2f}%")
+```
+
+```
+Varianza spiegata dalla componente principale 1: 53.68%
+Varianza spiegata dalla componente principale 2: 31.95%
+```
+
+### Correlation Heatmap
+The **Correlation Heatmap** shows the **relationships between the different variables** in the dataset after applying PCA. In the heatmap, the colors indicate the degree of correlation between the different variables:
+
+- **Positive Correlation**: Variables that are strongly positively correlated have a color closer to red. This means that when one variable increases, the other tends to increase as well.
+
+- **Negative Correlation**: Variables that are strongly negatively correlated have a color closer to blue. This means that when one variable increases, the other tends to decrease.
+
+- **Neutral Correlation**: Variables that are not strongly correlated have a color closer to white or gray, indicating a neutral or very weak correlation.
+
+To interpret the heatmap:
+- **Correlation between Principal Components and Original Attributes**: You can see how closely the two principal components (Principal Component 1 and Principal Component 2) correlate with the original attributes. A strong correlation could indicate that the principal components are capturing important information from the original attributes.
+
+- **Correlation between Original Attributes**: You can examine the correlations between the original attributes with each other. For example, you could see if there is a correlation between age and annual income, or between annual income and spending score.
+
+```python
+pca_df = pd.DataFrame(reduced_features, columns=['Componente Principale 1', 'Componente Principale 2'])
+df_encoded = pd.get_dummies(df, columns=['Gender'], drop_first=True)  # Encoding one-hot di "Gender"
+
+pca_df = pd.concat([pca_df, df_encoded], axis=1)
+
+correlation_matrix = pca_df.corr()
+sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm')
+```
+
