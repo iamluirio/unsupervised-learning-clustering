@@ -7,7 +7,7 @@
 
 **Clustering** is a type of unsupervised learning in machine learning and data analysis that involves grouping a set of objects in such a way that objects in the same group (called a **cluster**) are more similar to each other than to those in other groups (clusters). It is a common technique for statistical data analysis used in many fields, including machine learning, pattern recognition, image analysis, information retrieval, and bioinformatics.
 
-The project contains the [**DBSCAN Clustering algorithm**](https://it.wikipedia.org/wiki/Dbscan): it exploits the [**Euclidean distance**](https://en.wikipedia.org/wiki/Euclidean_distance) as a default metric to group connected points for density. Euclidean distance is a common measure used to calculate the distance between two points in the Euclidean space.
+The project contains the [**DBSCAN Clustering algorithm**](https://it.wikipedia.org/wiki/Dbscan): it exploits the [**Euclidean Distance**](https://en.wikipedia.org/wiki/Euclidean_distance) as a default metric to group connected points for density. Euclidean distance is a common measure used to calculate the distance between two points in the Euclidean space.
 
 In addition to the traditional approach, I used a different metric for the grouping of the elements in the formats trained: we want to change the algorithm to obtain a clustering based not on the similarity among the features of feature, but **on the similarity of each sample with the other samples**. To obtain this goal, I implemented the DBSCAN algorithm using the [**Cosine Similarity**](https://en.wikipedia.org/wiki/Cosine_similarity) metric: it's a measure that evaluates the corner between two vectors, indicating how similar they are in the direction. In the context of clustering or data analysis, the similarity of the cosine can be used to calculate how similar two samples are based on their characteristics.
 
@@ -47,10 +47,8 @@ We then compare the two different models, to observe the results.
 
 In the context of clustering or data analysis, cosine similarity can be used to calculate how similar two samples are based on their characteristics. Values ​​closer to 1 indicate that the samples are similar, while values ​​closer to 0 indicate that the samples are different.
 
-<img src="https://github.com/iamluirio/unsupervised-learning-clustering/assets/118205581/7a16c134-f92b-414c-82ae-c7e7fc766361" alt="Screenshot" width="300"/>
-
 <div align="center">
-  <img src="https://github.com/iamluirio/unsupervised-learning-clustering/assets/118205581/e2a59896-cb5c-4515-a3d5-0d7181fe5801" />
+<img src="https://github.com/iamluirio/unsupervised-learning-clustering/assets/118205581/7a16c134-f92b-414c-82ae-c7e7fc766361" alt="Screenshot" width="300"/>
 </div>
 
 ### Ideal Fundamental Parameters
