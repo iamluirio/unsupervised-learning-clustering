@@ -43,7 +43,7 @@ We want to modify the algorithm to obtain a clustering based not on the similari
 We then compare the two different models, to observe the results.
 
 ### Cosine Similarity Metric
-```cosine_similarity``` is a function that calculates the **cosine similarity between vectors**. It is often used to calculate the similarity between samples or objects in a multidimensional space. Cosine similarity is a measure that evaluates the angle between two vectors, indicating how similar they are in direction.
+```cosine_similarity``` is a function that calculates the [**cosine similarity between vectors**](https://en.wikipedia.org/wiki/Cosine_similarity). It is often used to calculate the similarity between samples or objects in a multidimensional space. Cosine similarity is a measure that evaluates the angle between two vectors, indicating how similar they are in direction.
 
 In the context of clustering or data analysis, cosine similarity can be used to calculate how similar two samples are based on their characteristics. Values ​​closer to 1 indicate that the samples are similar, while values ​​closer to 0 indicate that the samples are different.
 
