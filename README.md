@@ -51,7 +51,7 @@ In the context of clustering or data analysis, cosine similarity can be used to 
 
 <div align="center">
   <img src="https://github.com/iamluirio/unsupervised-learning-clustering/assets/118205581/e2a59896-cb5c-4515-a3d5-0d7181fe5801" />
-<div/>
+</div>
 
 ### Ideal Fundamental Parameters
 These parameters are essential for the operation of DBSCAN and will influence the shape and size of the clusters identified.
