@@ -191,7 +191,7 @@ plt.show()
 
 <div align="center">
 <img src="https://github.com/iamluirio/unsupervised-learning-clustering/assets/118205581/497765b0-c62a-4259-b25d-192f92a84de1" />
-</div>div>
+</div>
 
 - In the context of dimension reduction, the X-axis represents the first principal component (PC1) obtained from PCA. This component represents the direction along which the data varies the most.
 
