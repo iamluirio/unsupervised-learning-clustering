@@ -11,6 +11,17 @@ The project contains the [**DBSCAN Clustering algorithm**](https://it.wikipedia.
 
 In addition to the traditional approach, I used a different metric for the grouping of the elements in the formats trained: we want to change the algorithm to obtain a clustering **based not on the similarity among the features of feature**, but **on the similarity of each sample with the other samples**. To obtain this goal, I implemented the DBSCAN algorithm using the [**Cosine Similarity**](https://en.wikipedia.org/wiki/Cosine_similarity) metric: it's a measure that evaluates the corner between two vectors, indicating how similar they are in the direction. In the context of clustering or data analysis, the similarity of the cosine can be used to calculate how similar two samples are based on their characteristics.
 
+## :ledger: Index
+- [Dataset Import](#dataset-import)
+- [Project Structure](https://github.com/iamluirio/face-morphing-java-android?tab=readme-ov-file#project-structure)
+- [Morphing Process](https://github.com/iamluirio/face-morphing-java-android?tab=readme-ov-file#morphing-process)
+  - [Identifying the Facial Landmarks](https://github.com/iamluirio/face-morphing-java-android?tab=readme-ov-file#identifying-the-facial-landmarks)
+  - [Delaunay Triangulation](https://github.com/iamluirio/face-morphing-java-android?tab=readme-ov-file#delaunay-triangulation)
+  - [Calculating Linear Interpolation for Morphed Image](https://github.com/iamluirio/face-morphing-java-android?tab=readme-ov-file#calculating-linear-interpolation-for-morphed-image)
+  - [Getting Delaunay Indexes and Reshaping](https://github.com/iamluirio/face-morphing-java-android?tab=readme-ov-file#getting-delaunay-indexes-and-reshaping)
+  - [Morphing Triangles and Images](https://github.com/iamluirio/face-morphing-java-android?tab=readme-ov-file#morphing-triangles-and-images)
+  - [Results](https://github.com/iamluirio/face-morphing-java-android?tab=readme-ov-file#results)
+
 ## Dataset Import
 I based my analysis on [**_Mall_Customers.csv_**](https://www.kaggle.com/datasets/shwetabh123/mall-customers) downloadable from [**Kaggle**](https://www.kaggle.com/).
 
