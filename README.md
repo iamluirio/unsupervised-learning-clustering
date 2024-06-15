@@ -191,7 +191,7 @@ plt.show()
 
 <div align="center">
 <img src="https://github.com/iamluirio/unsupervised-learning-clustering/assets/118205581/497765b0-c62a-4259-b25d-192f92a84de1" />
-<div/>
+</div>div>
 
 - In the context of dimension reduction, the X-axis represents the first principal component (PC1) obtained from PCA. This component represents the direction along which the data varies the most.
 
@@ -263,7 +263,7 @@ Cluster color: (1.0, 0.4946558433997788, 0.2558427775944356, 1.0)
 
 <div align="center">
 <img src="https://github.com/iamluirio/unsupervised-learning-clustering/assets/118205581/67752cb7-8a52-4de6-86e9-677af2e40183" />
-<div/>
+</div>
 
 The red dots that do not form a connected region are actually outliers.
 
@@ -281,27 +281,4 @@ Varianza spiegata dalla componente principale 1: 53.68%
 Varianza spiegata dalla componente principale 2: 31.95%
 ```
 
-### Correlation Heatmap
-The **Correlation Heatmap** shows the **relationships between the different variables** in the dataset after applying PCA. In the heatmap, the colors indicate the degree of correlation between the different variables:
-
-- **Positive Correlation**: Variables that are strongly positively correlated have a color closer to red. This means that when one variable increases, the other tends to increase as well.
-
-- **Negative Correlation**: Variables that are strongly negatively correlated have a color closer to blue. This means that when one variable increases, the other tends to decrease.
-
-- **Neutral Correlation**: Variables that are not strongly correlated have a color closer to white or gray, indicating a neutral or very weak correlation.
-
-To interpret the heatmap:
-- **Correlation between Principal Components and Original Attributes**: You can see how closely the two principal components (Principal Component 1 and Principal Component 2) correlate with the original attributes. A strong correlation could indicate that the principal components are capturing important information from the original attributes.
-
-- **Correlation between Original Attributes**: You can examine the correlations between the original attributes with each other. For example, you could see if there is a correlation between age and annual income, or between annual income and spending score.
-
-```python
-pca_df = pd.DataFrame(reduced_features, columns=['Componente Principale 1', 'Componente Principale 2'])
-df_encoded = pd.get_dummies(df, columns=['Gender'], drop_first=True)  # Encoding one-hot di "Gender"
-
-pca_df = pd.concat([pca_df, df_encoded], axis=1)
-
-correlation_matrix = pca_df.corr()
-sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm')
-```
 
