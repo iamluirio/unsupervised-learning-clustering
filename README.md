@@ -332,7 +332,7 @@ plt.show()
 ```
 
 <div align="center">
-![image](https://github.com/iamluirio/unsupervised-learning-clustering/assets/118205581/8ef384ea-01dc-4cef-87ad-9a1f8a722a35)
+  <img src="https://github.com/iamluirio/unsupervised-learning-clustering/assets/118205581/8ef384ea-01dc-4cef-87ad-9a1f8a722a35" />
 </div>
 
 ```python
@@ -352,6 +352,6 @@ plt.show()
 ```
 
 <div align="center">
-![image](https://github.com/iamluirio/unsupervised-learning-clustering/assets/118205581/6ca76557-ad37-4e61-be9d-732762ff4fcd)
+  <img src="https://github.com/iamluirio/unsupervised-learning-clustering/assets/118205581/6ca76557-ad37-4e61-be9d-732762ff4fcd" />
 </div>
 
