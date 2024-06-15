@@ -37,8 +37,6 @@ If you are interested in the traditional Euclidean Distance based DBSCAN approac
 ## Innovative Approach
 We want to modify the algorithm to obtain a clustering based not on the similarities between the feature vectors, but **on the similarities of each sample with the other samples**.
 
-We then compare the two different models, to observe the results.
-
 ### Cosine Similarity Metric
 ```cosine_similarity``` is a function that calculates the [**cosine similarity between vectors**](https://en.wikipedia.org/wiki/Cosine_similarity). It is often used to calculate the similarity between samples or objects in a multidimensional space. Cosine similarity is a measure that evaluates the angle between two vectors, indicating how similar they are in direction.
 
