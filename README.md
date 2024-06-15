@@ -13,14 +13,15 @@ In addition to the traditional approach, I used a different metric for the group
 
 ## :ledger: Index
 - [Dataset Import](#dataset-import)
-- [Project Structure](https://github.com/iamluirio/face-morphing-java-android?tab=readme-ov-file#project-structure)
-- [Morphing Process](https://github.com/iamluirio/face-morphing-java-android?tab=readme-ov-file#morphing-process)
-  - [Identifying the Facial Landmarks](https://github.com/iamluirio/face-morphing-java-android?tab=readme-ov-file#identifying-the-facial-landmarks)
-  - [Delaunay Triangulation](https://github.com/iamluirio/face-morphing-java-android?tab=readme-ov-file#delaunay-triangulation)
-  - [Calculating Linear Interpolation for Morphed Image](https://github.com/iamluirio/face-morphing-java-android?tab=readme-ov-file#calculating-linear-interpolation-for-morphed-image)
-  - [Getting Delaunay Indexes and Reshaping](https://github.com/iamluirio/face-morphing-java-android?tab=readme-ov-file#getting-delaunay-indexes-and-reshaping)
-  - [Morphing Triangles and Images](https://github.com/iamluirio/face-morphing-java-android?tab=readme-ov-file#morphing-triangles-and-images)
-  - [Results](https://github.com/iamluirio/face-morphing-java-android?tab=readme-ov-file#results)
+- [Traditional Approach](#traditional-approach)
+- [Innovative Approach](#innovative-approach)
+  -[Cosine Similarity Metric](#cosine-similarity-metric)
+  - [Ideal Fundamental Parameters](#ideal-fundamental-parameters)
+  - [DBSCAN Model](#dbscan-model)
+  - [Visualizing and Comparing Clusters](#visualizing-and-comparing-clusters)
+  - [Explained Variance](#explained-variance)
+  - [Davies-Bouldin Index](#davies-bouldin-index)
+  - [Scatter Plot with t-SNE](#scatter-plot-with-t-sne)
 
 ## Dataset Import
 I based my analysis on [**_Mall_Customers.csv_**](https://www.kaggle.com/datasets/shwetabh123/mall-customers) downloadable from [**Kaggle**](https://www.kaggle.com/).
