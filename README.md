@@ -281,4 +281,77 @@ Varianza spiegata dalla componente principale 1: 53.68%
 Varianza spiegata dalla componente principale 2: 31.95%
 ```
 
+### Davies-Bouldin Index
+It measures the "feasibility" of clusters, considering both the average distance between cluster points and the distance between cluster centroids. The lower the value, the better the clusters.
+
+```python
+# Calcola la matrice delle distanze
+distance_matrix = pairwise_distances(cosine_matrix, metric='euclidean')
+
+# Calcola l'indice di Davies-Bouldin
+davies_bouldin_index2 = davies_bouldin_score(cosine_matrix, clusters)
+```
+```
+Davies-Bouldin Index: 1.651289505943405
+```
+
+A DBI value of 1.6 is generally considered a good value. DBI ranges from 0 to a theoretically infinite value. Lower values ​​indicate more compact and well-separated clusters, which is a desirable goal for a clustering algorithm.
+
+### Scatter Plot with t-SNE
+The data is projected into a two-dimensional space using [**t-SNE (t-distributed Stochastic Neighbor Embedding)**](https://it.wikipedia.org/wiki/T-distributed_stochastic_neighbor_embedding). This technique is particularly useful for visualizing high-dimensional data so that the relationships between observations are preserved. Again, the points are colored according to the cluster label.
+
+```python
+# Riduzione delle dimensioni con t-SNE a 2 componenti principali
+tsne = TSNE(n_components=2)
+reduced_features_tsne = tsne.fit_transform(cosine_matrix)
+```
+```python
+plt.figure(figsize=(8, 6))
+for i in range(n_clusters2):
+    cluster_points = reduced_features_tsne[clusters == i]
+    
+    if i == 0:
+        cluster_color = 'green'
+    elif i == 1:
+        cluster_color = 'blue'
+    elif i == 2:
+        cluster_color = 'orange'
+    else:
+        cluster_color = 'red'
+    
+    plt.scatter(cluster_points[:, 0], cluster_points[:, 1], color=cluster_color, label=f'Cluster {i}')
+    
+noise_points_tsne = reduced_features_tsne[clusters == -1]
+plt.scatter(noise_points_tsne[:, 0], noise_points_tsne[:, 1], color='red', marker='x', label='Noise (Outliers)')
+
+plt.xlabel('Componente T-SNE 1')
+plt.ylabel('Componente T-SNE 2')
+plt.title('Scatter Plot con t-SNE')
+plt.legend()
+plt.show()
+```
+
+<div align="center">
+![image](https://github.com/iamluirio/unsupervised-learning-clustering/assets/118205581/8ef384ea-01dc-4cef-87ad-9a1f8a722a35)
+</div>
+
+```python
+### Distance Heatmap
+The distance matrix calculated using ```pairwise_distances``` is displayed as a heatmap. A heatmap is a graphical representation where different intensities of an attribute are represented by colors. In this case, the colors represent the distance between observations. This can help identify groups of observations that are closest to each other.
+
+# Calcola la matrice delle distanze
+distance_matrix = pairwise_distances(cosine_matrix, metric='euclidean')
+
+# Crea una heatmap
+plt.figure(figsize=(10, 8))
+sns.heatmap(distance_matrix, cmap='YlGnBu', xticklabels=False, yticklabels=False)
+plt.title('Heatmap delle Distanze')
+plt.xlabel('Osservazioni')
+plt.ylabel('Osservazioni')
+plt.show()
+```
+
+<div align="center">
+![image](https://github.com/iamluirio/unsupervised-learning-clustering/assets/118205581/6ca76557-ad37-4e61-be9d-732762ff4fcd)
+</div>
 
