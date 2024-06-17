@@ -342,7 +342,6 @@ plt.show()
   <img src="https://github.com/iamluirio/unsupervised-learning-clustering/assets/118205581/8ef384ea-01dc-4cef-87ad-9a1f8a722a35" />
 </div>
 
-```python
 ### Distance Heatmap
 The distance matrix calculated using ```pairwise_distances``` is displayed as a heatmap. A heatmap is a graphical representation where different intensities of an attribute are represented by colors. In this case, the colors represent the distance between observations. This can help identify groups of observations that are closest to each other.
 
