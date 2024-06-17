@@ -345,6 +345,7 @@ plt.show()
 ### Distance Heatmap
 The distance matrix calculated using ```pairwise_distances``` is displayed as a heatmap. A heatmap is a graphical representation where different intensities of an attribute are represented by colors. In this case, the colors represent the distance between observations. This can help identify groups of observations that are closest to each other.
 
+```python
 # Calcola la matrice delle distanze
 distance_matrix = pairwise_distances(cosine_matrix, metric='euclidean')
 
