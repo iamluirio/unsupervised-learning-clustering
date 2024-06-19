@@ -44,7 +44,7 @@ standard_matrix = df.iloc[:,[3,4]].values
 We extract the _Annual Income_ and _Spending Score_ columns from the dataframe to apply the algorithm, using these two features to compare the different samples, and to be able to group clusters of samples.
 
 This is the classic approach based on **based on the similarities between the feature vectors**. 
-If you are interested in the traditional Euclidean Distance based DBSCAN approach, please refer to [_traditional_approach.ipynb_](https://github.com/iamluirio/unsupervised-learning-clustering/blob/main/traditional_approach.ipynb).
+If you are interested in the traditional Euclidean Distance based DBSCAN approach, please refer to [traditional_approach.ipynb](https://github.com/iamluirio/unsupervised-learning-clustering/blob/main/traditional_approach.ipynb).
 
 ## Innovative Approach
 We want to modify the algorithm to obtain a clustering based not on the similarities between the feature vectors, but **on the similarities of each sample with the other samples**.
